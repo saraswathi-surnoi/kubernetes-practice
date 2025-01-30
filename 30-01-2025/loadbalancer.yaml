@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-lb
+spec:
+  type: LoadBalancer
+  selector:
+    project: sarushop
+    module: backend
+    environment: dev
+  ports:
+  - name: nginx
+    protocol: TCP
+    port: 80 
+    targetPort: 80 

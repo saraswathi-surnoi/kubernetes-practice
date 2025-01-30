@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+  namespace: sarushop
+  labels:
+    module: backend
+    environment: dev
+    managed: saraswathi
+  annotations:
+    description: "this is my workshop"
+    maintainer: "saraswathi"
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80

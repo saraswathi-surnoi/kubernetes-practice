@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  type: NodePort
+  selector:
+    project: sarushop
+    module: backend
+    environment: dev
+  ports:
+  - name: nginx
+    protocol: TCP
+    port: 80 
+    targetPort: 80 

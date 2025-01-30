@@ -1,0 +1,11 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: sarushop
+  region: ap-south-1
+managedNodeGroups:
+  - name: spot
+    instanceType: t3.large
+    desiredCapacity: 2
+    spot: true
