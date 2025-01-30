@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: saraswathi
+  name: myapp
   namespace: sarushop
 spec:
   containers:
