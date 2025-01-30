@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-IP
+  name: nginx-test
   # namespace: sarushop
   labels:
     name: nginx-service
