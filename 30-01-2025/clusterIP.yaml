@@ -26,6 +26,7 @@ metadata:
   name: backend-service
   # namespace: sarushop
 spec:
+  type: clusterIP
   selector:
     name: nginx-service
     app: backend
