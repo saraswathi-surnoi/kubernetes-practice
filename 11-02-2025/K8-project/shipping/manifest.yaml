@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shipping
+  namespace: sarushop
+data:
+  CART_ENDPOINT: "cart:8080"
+  DB_HOST: "mysql"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping
+  namespace: sarushop 
+  labels:
+    name: shipping
+    project: sarushop
+    tier: app 
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # deployment-set labels
+      name: shipping
+      project: sarushop
+      tier: app
+  template: # pod defination
+    metadata:
+      labels: # pod labels
+        name: shipping
+        project: sarushop
+        tier: app
+    spec:
+      containers:
+      - name: shipping
+        image: iamroyalreddy/shipping:v1
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: shipping
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shipping
+  namespace:sarushop
+spec:
+  selector:
+    name: shipping
+    project:sarushop
+    tier: app 
+  ports:
+  - protocol: TCP
+    port: 8080 #service-port
+    targetPort: 8080 #container-port
