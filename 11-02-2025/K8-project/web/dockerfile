@@ -1,17 +1,7 @@
 FROM nginx
-
-# Remove default index.html and default Nginx configuration (optional)
-RUN rm -rf /usr/share/nginx/html/index.html
+RUN rm -rf /usr/share/nginx/html/index.html 
+RUN rm -rf /etc/nginx/nginx.conf
 RUN rm -rf /etc/nginx/conf.d/default.conf
 
-# Copy custom Nginx configuration
-COPY sarushop.conf /etc/nginx/nginx.conf
-
-# Copy static files (ensure static/ contains index.html and other files)
-COPY static /usr/share/nginx/html/
-
-# Expose port 80 to make the service available
-EXPOSE 80
-
-# Start Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+ADD robokart.conf /etc/nginx/nginx.conf
+ADD static /usr/share/nginx/html/
