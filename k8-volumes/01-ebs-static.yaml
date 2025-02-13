@@ -30,15 +30,15 @@ kind: Pod
 metadata:
   name: ebs-static-test
 spec:
-nodeSelector:
-  topology.kubernetes.io/zone: ap-south-1b
-containers:
+  nodeSelector:
+    topology.kubernetes.io/zone: ap-south-1b
+  containers:
   - name: nginx
     image: nginx
     volumeMounts:
     - name: ebs-static-test
       mountPath: /usr/share/nginx/html
-volumes:
+  volumes:
   - name: ebs-static-test
     persistentVolumeClaim:
       claimName: ebs-static-test
