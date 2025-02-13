@@ -1,0 +1,6 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sarushop-ebs
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer #storage will created pod will be created 
