@@ -38,7 +38,7 @@ containers:
     volumeMounts:
     - name: ebs-static-test
       mountPath: /usr/share/nginx/html
-  volumes:
+volumes:
   - name: ebs-static-test
     persistentVolumeClaim:
       claimName: ebs-static-test
