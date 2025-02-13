@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-dynamic-test
+spec:
+  storageClassName: "sarushop-ebs"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-dynamic-test
+  labels:
+    purpose: ebs-dynamic-test
+spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1d
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts: # docker run -v hostpath:contaierpath
+    - name: ebs-dynamic
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: ebs-dynamic-test
+    persistentVolumeClaim:
+      claimName: ebs-dynamic-test
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-dynamic-test
+  ports:
+  - name: nginx-svc-port
+    protocol: TCP
+    port: 80 # service port
+    targetPort: 80 # container port
+    nodePort: 30007
