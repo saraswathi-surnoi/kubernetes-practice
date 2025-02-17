@@ -26,3 +26,36 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-efs
+  labels:
+    purpose: static-efs
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts: # docker run -v hostpath:contaierpath
+    - name: sarushop-efs
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: sarushop-efs
+    persistentVolumeClaim:
+      claimName: sarushop-efs
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: static-efs
+  ports:
+  - name: nginx-svc-port
+    protocol: TCP
+    port: 80 # service port
+    targetPort: 80 # container port
+    nodePort: 30007
