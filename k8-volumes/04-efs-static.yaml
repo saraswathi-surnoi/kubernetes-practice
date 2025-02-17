@@ -13,3 +13,16 @@ spec:
   csi:
     driver: efs.csi.aws.com
     volumeHandle: fs-0bb3161d74c9341e0
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sarushop-efs
+spec:
+  volumeName: sarushop-efs
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 5Gi
