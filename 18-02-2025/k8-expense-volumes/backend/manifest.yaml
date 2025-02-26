@@ -63,7 +63,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
  name: backend
-namespace: expense
+ namespace: expense
 spec:
  scaleTargetRef:
    apiVersion: apps/v1
@@ -71,4 +71,4 @@ spec:
    name: backend
  minReplicas: 1
  maxReplicas: 10
- targetCPUUtilizationPercentage: 15
+ targetCPUUtilizationPercentage: 15 # usually 75 in real environment
