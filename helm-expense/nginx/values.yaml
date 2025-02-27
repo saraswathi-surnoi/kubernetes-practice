@@ -1,6 +1,6 @@
 deployment:
-  imageVersion: latest
-  replicas: 2
+  imageVersion: stabel-pearl
+  replicas: 4
 service:
   port: 80
   type: LoadBalancer
